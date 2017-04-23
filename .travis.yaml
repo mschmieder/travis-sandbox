@@ -25,6 +25,7 @@ script:
   - graphviz --version
   - cmake --version
   - doxygen --version
+  - echo "Hello $TRAVIS_OS_NAME"
 
 matrix:
   include:
