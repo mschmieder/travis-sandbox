@@ -11,13 +11,12 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update           ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen  ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cmake    ; fi
 
 script:
   - cmake --version
   - doxygen --version
   - echo "Hello $TRAVIS_OS_NAME"
-  - clang --version
+  - $CXX --version
 
 matrix:
   include:
