@@ -1,44 +1,23 @@
+#
+# This file was auto-generated from extras/scripts/travis_yml_generator.py, DO NOT EDIT
+#
+branches:
+  only:
+  - master
+dist: trusty
 language: cpp
-
-addons:
-  apt:
-    sources:
-      - llvm-toolchain-precise
-      - ubuntu-toolchain-r-test
-    packages:
-      - clang-3.7
-      - g++-5
-      - gcc-5
-      - graphviz
-      - doxygen
-      - cmake
-
-before_install: 
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update           ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install graphviz ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install doxygen  ; fi
-
-script:
-  - cmake --version
-  - doxygen --version
-  - echo "Hello $TRAVIS_OS_NAME"
-  - echo "$CXX_COMPILER"
-  - $CXX_COMPILER --version
-  - env
-
 matrix:
+  fast_finish: true
   include:
   - compiler: gcc
-    env: CXX_COMPILER=g++-5 CC_COMPILER=gcc-5
+    env: COMPILER=gcc-6 UBUNTU=17.04 TEST=Debug
+    install: export OS=linux; export COMPILER='gcc-6'; export UBUNTU='17.04'; scripts/travis_ci_install_linux.sh
     os: linux
-    dist: trusty
-    sudo: required
-  - compiler: clang
-    env: CXX_COMPILER=clang++-3.7 CC_COMPILER=clang-3.7
-    os: linux
-    dist: trusty
-    sudo: required
-  - compiler: clang
-    env: CXX_COMPILER=clang++ CC_COMPILER=clang
-    os: osx
-    osx_image: xcode8.2
+    script: export OS=linux; export COMPILER='gcc-6'; export UBUNTU='17.04'; scripts/postsubmit.sh
+      cppunit
+      $(pwd)/cppunit
+      Debug
+services:
+- docker
+sudo: required
+
