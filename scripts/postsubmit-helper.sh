@@ -84,17 +84,16 @@ echo CXX version: $($CXX --version)
 echo C++ Standard library location: $(echo '#include <vector>' | $CXX -x c++ -E - | grep 'vector\"' | awk '{print $3}' | sed 's@/vector@@;s@\"@@g' | head -n 1)
 echo Normalized C++ Standard library location: $(readlink -f $(echo '#include <vector>' | $CXX -x c++ -E - | grep 'vector\"' | awk '{print $3}' | sed 's@/vector@@;s@\"@@g' | head -n 1))
 
-case "$1" in
+case "$2" in
 Debug)   CMAKE_ARGS=(-DCMAKE_BUILD_TYPE=Debug   -DCMAKE_CXX_FLAGS="$STLARG") ;;
 Release) CMAKE_ARGS=(-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="$STLARG") ;;
 *) echo "Error: you need to specify one of the supported postsubmit modes (see postsubmit.sh)."; exit 1 ;;
 esac
 
-ls -lachs
 rm -rf build
 mkdir build
 cd build
-cmake .. "${CMAKE_ARGS[@]} ${ADDITIONAL_CMAKE_ARGS}"
+cmake ../${SRC_ROOT} "${CMAKE_ARGS[@]} ${ADDITIONAL_CMAKE_ARGS}"
 echo
 echo "Content of CMakeFiles/CMakeError.log:"
 if [ -f "CMakeFiles/CMakeError.log" ]

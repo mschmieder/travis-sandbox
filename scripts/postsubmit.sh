@@ -21,8 +21,8 @@ linux)
         export STLARG=$STLARG; 
         export OS=$OS;
         ls -lachs
-        cd ${PROJECT_NAME}/${SRC_ROOT}
-        bash scripts/postsubmit-helper.sh $1"
+        cd ${PROJECT_NAME}
+        bash scripts/postsubmit-helper.sh $SRC_ROOT $1"
     exit $?
     ;;
 
