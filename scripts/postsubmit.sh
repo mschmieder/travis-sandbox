@@ -29,7 +29,7 @@ osx)
     export N_JOBS
     export STLARG
     export OS
-    bash ${}${PROJECT_NAME}/scripts/postsubmit-helper.sh "$@"
+    bash ${PROJECT_NAME}/scripts/postsubmit-helper.sh "$@"
     exit $?
     ;;
 
