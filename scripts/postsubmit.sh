@@ -1,5 +1,6 @@
 #!/bin/bash
 PROJECT_NAME=$1
+PROJECT_ROOT=$2
 shift
 shift
 
