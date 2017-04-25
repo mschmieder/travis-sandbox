@@ -17,7 +17,7 @@ matrix:
       - bash scripts/travis_ci_install_linux.sh
     os: linux
     script:
-      - bash scripts/postsubmit.sh cppunit $(pwd)/cppunit Debug
+      - bash scripts/postsubmit.sh travis-sandbox cppunit Debug
 services:
 - docker
 sudo: required
