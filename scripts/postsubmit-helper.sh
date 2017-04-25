@@ -106,12 +106,6 @@ fi
 echo
 run_make
 
-#cd examples
-#run_make
-#cd ..
-
-#cd tests
-#run_make
 #ctest --output-on-failure -j$N_JOBS
 
 make install
