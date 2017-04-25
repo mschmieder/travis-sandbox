@@ -15,10 +15,7 @@ matrix:
     os: linux
     script: 
       - git submodule init && git submodule update
-      - export OS=linux; export COMPILER='gcc-6'; export UBUNTU='17.04'; scripts/postsubmit.sh
-      cppunit
-      $(pwd)/cppunit
-      Debug
+      - export OS=linux; export COMPILER='gcc-6'; export UBUNTU='17.04'; scripts/postsubmit.sh cppunit $(pwd)/cppunit Debug
 services:
 - docker
 sudo: required
