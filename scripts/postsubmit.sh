@@ -15,7 +15,7 @@ linux)
     docker exec ${PROJECT_NAME} mkdir ${PROJECT_NAME}
     docker cp . ${PROJECT_NAME}:/${PROJECT_NAME}
     
-    docker exec fruit bash -c "
+    docker exec ${PROJECT_NAME} bash -c "
         export COMPILER=$COMPILER; 
         export N_JOBS=$N_JOBS;
         export STLARG=$STLARG; 
