@@ -90,6 +90,7 @@ Release) CMAKE_ARGS=(-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="$STLARG") ;;
 *) echo "Error: you need to specify one of the supported postsubmit modes (see postsubmit.sh)."; exit 1 ;;
 esac
 
+ls -lachs
 rm -rf build
 mkdir build
 cd build
@@ -103,9 +104,9 @@ fi
 echo
 run_make
 
-cd examples
-run_make
-cd ..
+#cd examples
+#run_make
+#cd ..
 
 #cd tests
 #run_make

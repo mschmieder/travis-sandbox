@@ -20,6 +20,7 @@ linux)
         export N_JOBS=$N_JOBS;
         export STLARG=$STLARG; 
         export OS=$OS;
+        ls -lachs
         cd ${PROJECT_NAME}
         bash scripts/postsubmit-helper.sh $1"
     exit $?
