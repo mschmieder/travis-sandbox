@@ -18,6 +18,7 @@ matrix:
     os: linux
     script:
       - bash scripts/postsubmit.sh travis-sandbox cppunit Debug
+      - cd travis-sandbox && ls -lachs
 services:
 - docker
 sudo: required
