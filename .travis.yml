@@ -10,14 +10,14 @@ matrix:
   fast_finish: true
   include:
   - compiler: gcc
-    env: COMPILER=gcc-6 UBUNTU=17.04 TEST=Debug
+    env: OS=linux COMPILER=gcc-6 UBUNTU=17.04 TEST=Debug
     install: 
       - pwd
       - ls -lachs
       - bash scripts/travis_ci_install_linux.sh
     os: linux
     script:
-      - bash scripts/postsubmit.sh cppunit $(pwd)/cppunit Debug
+      - env && bash scripts/postsubmit.sh cppunit $(pwd)/cppunit Debug
 services:
 - docker
 sudo: required
