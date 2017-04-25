@@ -22,7 +22,7 @@ linux)
         export OS=$OS;
         ls -lachs
         cd ${PROJECT_NAME}
-        bash scripts/postsubmit-helper.sh $SRC_ROOT $1"
+        bash ${PROJECT_NAME}/scripts/postsubmit-helper.sh $SRC_ROOT $1"
     exit $?
     ;;
 
@@ -31,7 +31,7 @@ osx)
     export N_JOBS
     export STLARG
     export OS
-    bash scripts/postsubmit-helper.sh "$@"
+    bash ${}${PROJECT_NAME}/scripts/postsubmit-helper.sh "$@"
     exit $?
     ;;
 
