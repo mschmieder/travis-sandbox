@@ -20,7 +20,8 @@ linux)
         export N_JOBS=$N_JOBS;
         export STLARG=$STLARG; 
         export OS=$OS;
-        cd ${PROJECT_ROOT}; scripts/postsubmit-helper.sh $1"
+        cd ${PROJECT_ROOT}
+        bash scripts/postsubmit-helper.sh $1"
     exit $?
     ;;
 
@@ -29,7 +30,7 @@ osx)
     export N_JOBS
     export STLARG
     export OS
-    scripts/postsubmit-helper.sh "$@"
+    bash scripts/postsubmit-helper.sh "$@"
     exit $?
     ;;
 
