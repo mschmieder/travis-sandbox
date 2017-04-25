@@ -17,7 +17,7 @@ matrix:
     script:
       - scripts/postsubmit.sh travis-sandbox cppunit Debug
       - scripts/postsubmit.sh travis-sandbox cppunit Release
-- compiler: clang
+  - compiler: clang
     env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
     install: 
       - scripts/travis_ci_install_osx.sh
