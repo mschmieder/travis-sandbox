@@ -2,6 +2,9 @@
 
 set -e
 
+SRC_ROOT=$1
+CONFIG=$2
+
 # This only exists in OS X, but it doesn't cause issues in Linux (the dir doesn't exist, so it's
 # ignored).
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -84,7 +87,7 @@ echo CXX version: $($CXX --version)
 echo C++ Standard library location: $(echo '#include <vector>' | $CXX -x c++ -E - | grep 'vector\"' | awk '{print $3}' | sed 's@/vector@@;s@\"@@g' | head -n 1)
 echo Normalized C++ Standard library location: $(readlink -f $(echo '#include <vector>' | $CXX -x c++ -E - | grep 'vector\"' | awk '{print $3}' | sed 's@/vector@@;s@\"@@g' | head -n 1))
 
-case "$2" in
+case "${CONFIG}" in
 Debug)   CMAKE_ARGS=(-DCMAKE_BUILD_TYPE=Debug   -DCMAKE_CXX_FLAGS="$STLARG") ;;
 Release) CMAKE_ARGS=(-DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="$STLARG") ;;
 *) echo "Error: you need to specify one of the supported postsubmit modes (see postsubmit.sh)."; exit 1 ;;
