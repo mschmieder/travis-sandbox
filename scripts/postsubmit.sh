@@ -30,7 +30,7 @@ osx)
     export OS
     pwd
     ls -lachs
-    bash ${PROJECT_NAME}/scripts/postsubmit-helper.sh ${SRC_ROOT} $@
+    bash scripts/postsubmit-helper.sh ${SRC_ROOT} $@
     exit $?
     ;;
 
