@@ -1,6 +1,3 @@
-#
-# This file was auto-generated from extras/scripts/travis_yml_generator.py, DO NOT EDIT
-#
 branches:
   only:
   - master
@@ -11,21 +8,44 @@ matrix:
   include:
   - compiler: gcc
     env: OS=linux COMPILER=gcc-6 UBUNTU=17.04 TEST=Debug
-    install: 
-      - scripts/travis_ci_install_linux.sh
+    install:
+    - scripts/travis_ci_install_linux.sh
     os: linux
     script:
-      - scripts/postsubmit.sh travis-sandbox cppunit Debug
-      - scripts/postsubmit.sh travis-sandbox cppunit Release
+    - scripts/postsubmit.sh travis-sandbox cppunit Debug
+    - scripts/postsubmit.sh travis-sandbox cppunit Release
+    after_success:
+    - cd install
+    - tar cfzv ../$cppunit_$OS_$COMPILER.tar *
+    provider: releases
+      api_key:
+        secure: tGCG6Qc8vlSXTfTOmWMgp0jAH5STilONMCxuk7Qi9Y+Li6j6hNZYCBfuYggO163CuNQEYhhlqm1so5mh9Ycr7c9Ox3dECem0je8maKeY6WNyIonK4tvKEdsAaIgeiUsQb4iPgy1lOCEqZSUjStPBZ80MinLYnbrheCYzi+D5lC5wkRw4liMnlyEMArSjC5ykndU5ZPXnTL1lL1mqvyrCGoXVSMiF4zn2SPOSN2lMafghgLssTX1NqreP/FrdVcA8ps49RVUMza6Yy7XvTkBGOMKdc9X0DjRGQ1aFicy05CZ7L2l+OYAAG9ncDQeDkK7R1IoaDiN49RMiwRpDsKdO0WydSxFFMrY7vh7HTX+eGMdFIwlLvv1lxQwYdNlwjTGkVrW5cxD4XizYdkjKC7Q9HE/2DI7YLRj8ZyRpzeePhxJBnvBaHoVINsZukp5UXKi4hpaNqQit2Qq67KuBcsKwntLg3wKBdfstTeLD1KEmZHGMm2B9UWrX8S0E9z/ArKo1cufBvMCubt54GT1FzTs8EiosSfeeIF/1FmAE9p+UySjIMDhurp2ZkNpUazX3tx1Lft19paBUg6jTb/1SF38p2IoK8i2l0jI2zSo/vb5V9ZNZfZE3j/LHf3AcbSIuHLM+yzxV3Znwl5E/AjTvEFbD9ASMaR2efVNzeqWswS5oCvA=
+      file: cppunit_$OS_$COMPILER.tar
+      skip_cleanup: true
+      on:
+        tags: false
+        all_branches: true
   - compiler: clang
     env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
-    install: 
-      - scripts/travis_ci_install_osx.sh
+    install:
+    - scripts/travis_ci_install_osx.sh
     os: osx
     osx_image: xcode8
     script:
-      - scripts/postsubmit.sh travis-sandbox cppunit Debug
-      - scripts/postsubmit.sh travis-sandbox cppunit Release
+    - scripts/postsubmit.sh travis-sandbox cppunit Debug
+    - scripts/postsubmit.sh travis-sandbox cppunit Release
+    after_success:
+    - cd install
+    - tar cfzv ../$cppunit_$OS_$COMPILER.tar *
+    deploy:
+      provider: releases
+      api_key:
+        secure: tGCG6Qc8vlSXTfTOmWMgp0jAH5STilONMCxuk7Qi9Y+Li6j6hNZYCBfuYggO163CuNQEYhhlqm1so5mh9Ycr7c9Ox3dECem0je8maKeY6WNyIonK4tvKEdsAaIgeiUsQb4iPgy1lOCEqZSUjStPBZ80MinLYnbrheCYzi+D5lC5wkRw4liMnlyEMArSjC5ykndU5ZPXnTL1lL1mqvyrCGoXVSMiF4zn2SPOSN2lMafghgLssTX1NqreP/FrdVcA8ps49RVUMza6Yy7XvTkBGOMKdc9X0DjRGQ1aFicy05CZ7L2l+OYAAG9ncDQeDkK7R1IoaDiN49RMiwRpDsKdO0WydSxFFMrY7vh7HTX+eGMdFIwlLvv1lxQwYdNlwjTGkVrW5cxD4XizYdkjKC7Q9HE/2DI7YLRj8ZyRpzeePhxJBnvBaHoVINsZukp5UXKi4hpaNqQit2Qq67KuBcsKwntLg3wKBdfstTeLD1KEmZHGMm2B9UWrX8S0E9z/ArKo1cufBvMCubt54GT1FzTs8EiosSfeeIF/1FmAE9p+UySjIMDhurp2ZkNpUazX3tx1Lft19paBUg6jTb/1SF38p2IoK8i2l0jI2zSo/vb5V9ZNZfZE3j/LHf3AcbSIuHLM+yzxV3Znwl5E/AjTvEFbD9ASMaR2efVNzeqWswS5oCvA=
+      file: cppunit_$OS_$COMPILER.tar
+      skip_cleanup: true
+      on:
+        tags: false
+        all_branches: true
 services:
 - docker
 sudo: required
