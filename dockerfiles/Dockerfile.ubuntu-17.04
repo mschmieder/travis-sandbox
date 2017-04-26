@@ -1,5 +1,5 @@
 FROM ubuntu:17.04
-MAINTAINER Marco Poletti <poletti.marco@gmail.com>
+MAINTAINER Matthias Schmieder <schmieder.matthias@gmail.com>
 
 COPY ubuntu-17.04_custom.list /etc/apt/sources.list.d/
 COPY common_install.sh common_cleanup.sh ubuntu-17.04_install.sh /

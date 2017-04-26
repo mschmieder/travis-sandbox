@@ -11,16 +11,15 @@ set -e
 case $OS in
 linux)
     docker rm -f ${PROJECT_NAME} &>/dev/null || true
-    docker run -v $(pwd):/${PROJECT_NAME} -d -it --name ${PROJECT_NAME} --privileged polettimarco/fruit-basesystem:ubuntu-$UBUNTU
+    docker run -v $(pwd):/${PROJECT_NAME} -d -it --name ${PROJECT_NAME} --privileged mschmieder/cpp-base-buildsystem:ubuntu-$UBUNTU
     
     docker exec ${PROJECT_NAME} bash -c "
         export COMPILER=$COMPILER; 
         export N_JOBS=$N_JOBS;
         export STLARG=$STLARG; 
         export OS=$OS;
-        ls -lachs
         cd ${PROJECT_NAME}
-        bash scripts/postsubmit-helper.sh $SRC_ROOT $1"
+        bash scripts/postsubmit-helper.sh ${SRC_ROOT} ${PROJECT_NAME}"
     exit $?
     ;;
 
@@ -29,7 +28,9 @@ osx)
     export N_JOBS
     export STLARG
     export OS
-    bash ${PROJECT_NAME}/scripts/postsubmit-helper.sh "$@"
+    pwd
+    ls -lachs
+    bash ${PROJECT_NAME}/scripts/postsubmit-helper.sh ${SRC_ROOT} ${PROJECT_NAME}
     exit $?
     ;;
 
