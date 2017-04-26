@@ -19,7 +19,7 @@ linux)
         export STLARG=$STLARG; 
         export OS=$OS;
         cd ${PROJECT_NAME}
-        bash scripts/postsubmit-helper.sh ${SRC_ROOT} ${PROJECT_NAME}"
+        bash scripts/postsubmit-helper.sh ${SRC_ROOT} $@"
     exit $?
     ;;
 
@@ -30,7 +30,7 @@ osx)
     export OS
     pwd
     ls -lachs
-    bash ${PROJECT_NAME}/scripts/postsubmit-helper.sh ${SRC_ROOT} ${PROJECT_NAME}
+    bash ${PROJECT_NAME}/scripts/postsubmit-helper.sh ${SRC_ROOT} $@
     exit $?
     ;;
 
