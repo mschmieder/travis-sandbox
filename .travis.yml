@@ -25,7 +25,7 @@ matrix:
     - scripts/postsubmit.sh travis-sandbox cppunit Release
     after_success:
     - cd install
-    - tar cfzv ../$cppunit_${OS}_${COMPILER}.tar *
+    - tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
     - cd ..
 services:
 - docker
