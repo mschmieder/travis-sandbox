@@ -26,6 +26,7 @@ matrix:
     after_success:
     - cd install
     - tar cfzv ../$cppunit_${OS}_${COMPILER}.tar *
+    - cd ..
 services:
 - docker
 sudo: required
