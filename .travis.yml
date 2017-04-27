@@ -12,21 +12,24 @@ matrix:
     - scripts/postsubmit.sh travis-sandbox cppunit Debug
     - scripts/postsubmit.sh travis-sandbox cppunit Release
     after_success:
-    - cd build/install
+    - pwd
+    - ls -lachs
+    - cd travis-sandbox/build/install
+    - ls -lachs
     - tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
-  - compiler: clang
-    env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
-    install:
-    - scripts/travis_ci_install_osx.sh
-    os: osx
-    osx_image: xcode8
-    script:
-    - scripts/postsubmit.sh travis-sandbox cppunit Debug
-    - scripts/postsubmit.sh travis-sandbox cppunit Release
-    after_success:
-    - cd build/install
-    - tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
-    - cd -
+#  - compiler: clang
+#    env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
+#    install:
+#    - scripts/travis_ci_install_osx.sh
+#    os: osx
+#    osx_image: xcode8
+#    script:
+#    - scripts/postsubmit.sh travis-sandbox cppunit Debug
+#    - scripts/postsubmit.sh travis-sandbox cppunit Release
+#    after_success:
+#    - cd build/install
+#    - tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
+#    - cd -
 services:
 - docker
 sudo: required
