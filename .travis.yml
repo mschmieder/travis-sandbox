@@ -9,14 +9,16 @@ matrix:
     - scripts/travis_ci_install_linux.sh
     os: linux
     script:
-    - scripts/postsubmit.sh travis-sandbox cppunit Debug
-    - scripts/postsubmit.sh travis-sandbox cppunit Release
-    after_success:
+    - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Debug
+    - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Release
+    - echo "####################################################################"
+    - echo "going to ${TRAVIS_BUILD_DIR}"
+    - echo "####################################################################"
+    - cd ${TRAVIS_BUILD_DIR}/build
     - pwd
-    - ls -lachs
-    - cd travis-sandbox/build/install
-    - ls -lachs
-    - tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
+    - ls -lachs 
+    after_success:
+    - cd ${TRAVIS_BUILD_DIR}/build/install && tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
 #  - compiler: clang
 #    env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
 #    install:
@@ -39,7 +41,7 @@ deploy:
   api_key:
     secure: tGCG6Qc8vlSXTfTOmWMgp0jAH5STilONMCxuk7Qi9Y+Li6j6hNZYCBfuYggO163CuNQEYhhlqm1so5mh9Ycr7c9Ox3dECem0je8maKeY6WNyIonK4tvKEdsAaIgeiUsQb4iPgy1lOCEqZSUjStPBZ80MinLYnbrheCYzi+D5lC5wkRw4liMnlyEMArSjC5ykndU5ZPXnTL1lL1mqvyrCGoXVSMiF4zn2SPOSN2lMafghgLssTX1NqreP/FrdVcA8ps49RVUMza6Yy7XvTkBGOMKdc9X0DjRGQ1aFicy05CZ7L2l+OYAAG9ncDQeDkK7R1IoaDiN49RMiwRpDsKdO0WydSxFFMrY7vh7HTX+eGMdFIwlLvv1lxQwYdNlwjTGkVrW5cxD4XizYdkjKC7Q9HE/2DI7YLRj8ZyRpzeePhxJBnvBaHoVINsZukp5UXKi4hpaNqQit2Qq67KuBcsKwntLg3wKBdfstTeLD1KEmZHGMm2B9UWrX8S0E9z/ArKo1cufBvMCubt54GT1FzTs8EiosSfeeIF/1FmAE9p+UySjIMDhurp2ZkNpUazX3tx1Lft19paBUg6jTb/1SF38p2IoK8i2l0jI2zSo/vb5V9ZNZfZE3j/LHf3AcbSIuHLM+yzxV3Znwl5E/AjTvEFbD9ASMaR2efVNzeqWswS5oCvA=
   file_glob: true
-  file: build/cppunit_*.tar
+  file: ${TRAVIS_BUILD_DIR}/build/cppunit_*.tar
   skip_cleanup: true
   on:
     tags: true
