@@ -11,14 +11,11 @@ matrix:
     script:
     - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Debug
     - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Release
-    - echo "####################################################################"
-    - echo "going to ${TRAVIS_BUILD_DIR}"
-    - echo "####################################################################"
-    - cd ${TRAVIS_BUILD_DIR}/build
-    - pwd
-    - ls -lachs 
+    - chown -R $USER:$USER *
     after_success:
     - cd ${TRAVIS_BUILD_DIR}/build/install && tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
+    - cd ${TRAVIS_BUILD_DIR}/build
+    - ls -lachs
 #  - compiler: clang
 #    env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
 #    install:
