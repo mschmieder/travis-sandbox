@@ -106,6 +106,4 @@ fi
 echo
 run_make
 
-#ctest --output-on-failure -j$N_JOBS
-
 make install

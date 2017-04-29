@@ -28,8 +28,6 @@ osx)
     export N_JOBS
     export STLARG
     export OS
-    pwd
-    ls -lachs
     bash scripts/postsubmit-helper.sh ${SRC_ROOT} $@
     exit $?
     ;;
