@@ -11,7 +11,7 @@ matrix:
     script:
     - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Debug
     - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Release
-    - chown -R $USER:$USER *
+    - sudo chown -R $USER:$USER *
     after_success:
     - cd ${TRAVIS_BUILD_DIR}/build/install && tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
     - cd ${TRAVIS_BUILD_DIR}/build
