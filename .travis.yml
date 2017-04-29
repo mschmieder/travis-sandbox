@@ -14,21 +14,17 @@ matrix:
     - sudo chown -R $USER:$USER *
     after_success:
     - cd ${TRAVIS_BUILD_DIR}/build/install && tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
-    - cd ${TRAVIS_BUILD_DIR}/build
-    - ls -lachs
-#  - compiler: clang
-#    env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
-#    install:
-#    - scripts/travis_ci_install_osx.sh
-#    os: osx
-#    osx_image: xcode8
-#    script:
-#    - scripts/postsubmit.sh travis-sandbox cppunit Debug
-#    - scripts/postsubmit.sh travis-sandbox cppunit Release
-#    after_success:
-#    - cd build/install
-#    - tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
-#    - cd -
+  - compiler: clang
+    env: COMPILER=clang-4.0 STL=libc++ TEST=Debug OS=osx
+    os: osx
+    osx_image: xcode8
+    install:
+    - scripts/travis_ci_install_osx.sh
+    script:
+    - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Debug
+    - cd ${TRAVIS_BUILD_DIR}/ && scripts/postsubmit.sh travis-sandbox cppunit Release
+    after_success:
+    - cd ${TRAVIS_BUILD_DIR}/build/install && tar cfzv ../cppunit_${OS}_${COMPILER}.tar *
 services:
 - docker
 sudo: required
